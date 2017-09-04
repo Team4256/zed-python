@@ -41,33 +41,33 @@ class PyMESH_TEXTURE_FORMAT(enum.Enum):
     PyMESH_TEXTURE_RGBA = MESH_TEXTURE_RGBA
     PyMESH_TEXTURE_LAST = MESH_TEXTURE_LAST
 
-class PyFILTER(enum.Enum):
-    PyFILTER_LOW = FILTER_LOW
-    PyFILTER_MEDIUM = FILTER_MEDIUM
-    PyFILTER_HIGH = FILTER_HIGH
+#class PyFILTER(enum.Enum):
+#    PyFILTER_LOW = FILTER_LOW
+#    PyFILTER_MEDIUM = FILTER_MEDIUM
+#    PyFILTER_HIGH = FILTER_HIGH
 
 
-cdef class PyMeshFilterParameters:
-    cdef MeshFilterParameters* meshFilter
-    cdef FILTER filter
-    def __cinit__(self):
-        self.filter = FILTER_LOW
-        self.meshFilter = new MeshFilterParameters(FILTER_LOW)
+#cdef class PyMeshFilterParameters:
+#    cdef MeshFilterParameters* meshFilter
+#    cdef FILTER filter
+#    def __cinit__(self):
+#        self.filter = FILTER_LOW
+#        self.meshFilter = new MeshFilterParameters(FILTER_LOW)
 
-    def set(self, filter=PyFILTER.PyFILTER_LOW):
-        if isinstance(filter, PyFILTER):
-            self.filter = filter.value
-            set(filter.name)
-        else:
-            raise TypeError("Argument is not of PyFILTER type.")
+#    def set(self, filter=PyFILTER.PyFILTER_LOW):
+#        if isinstance(filter, PyFILTER):
+#            self.filter = filter.value
+#            set(filter.name)
+#        else:
+#            raise TypeError("Argument is not of PyFILTER type.")
 
-    def save(self, str filename):
-        filename_save = filename.encode()
-        return self.meshFilter.save(types.String(<char*> filename_save))
+#    def save(self, str filename):
+#        filename_save = filename.encode()
+#        return self.meshFilter.save(types.String(<char*> filename_save))
 
-    def load(self, str filename):
-        filename_load = filename.encode()
-        return self.meshFilter.load(types.String(<char*> filename_load))
+#    def load(self, str filename):
+#        filename_load = filename.encode()
+#        return self.meshFilter.load(types.String(<char*> filename_load))
 
 
 cdef class PyTexture:
@@ -163,11 +163,11 @@ cdef class PyMesh:
     def __getitem__(self, x):
         return self.chunks[x]
 
-    def filter(self, PyMeshFilterParameters params, update_mesh=True):
-        if isinstance(update_mesh, bool):
-            return self.mesh.filter(deref(params.meshFilter), update_mesh)
-        else:
-            raise TypeError("Argument is not of boolean type.")
+#    def filter(self, PyMeshFilterParameters params, update_mesh=True):
+#        if isinstance(update_mesh, bool):
+#            return self.mesh.filter(deref(params.meshFilter), update_mesh)
+#        else:
+#            raise TypeError("Argument is not of boolean type.")
 
     def apply_texture(self, texture_format=PyMESH_TEXTURE_FORMAT.PyMESH_TEXTURE_RGB):
         if isinstance(texture_format, PyMESH_TEXTURE_FORMAT):
